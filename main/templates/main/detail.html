@@ -1,0 +1,87 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Детали недвижимости{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for image in estate.images.all %}
+                    {% if forloop.counter == 1 %}
+                        <div class="carousel-item active">
+                            <img src="{{ image.image.url }}" class="d-block w-100">
+                        </div>
+                    {% else %}
+                        <div class="carousel-item">
+                            <img src="{{ image.image.url }}" class="d-block w-100">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="container text-center w-50 mt-5">
+        <div class="row text-center">
+            <div class="col-lg-9 text-center">
+                <h2 class="text-detail">{{ estate.title }}</h2>
+            </div>
+            <div class="col-lg-3 text-center">
+                <h2 class="text-detail">{{ estate.price }}</h2>
+            </div>
+
+            <div class="col-lg-9 text-center">
+                <div class="col-detail">
+                    <p class="mt-1">Количество комнат: {{ estate.qty_rooms }}</p>
+                    <p>Материал стен: {{ estate.material }}</p>
+                    <p>В залоге: {% if estate.deposit %}да{% else %}нет{% endif %}</p>
+                    <p>Площадь: {{ estate.area }}</p>
+                    <p>Улица: {{ estate.street }}</p>
+                    <p>Этаж: {{ estate.floor }}</p>
+                </div>
+            </div>
+            <div class="col-lg-3 text-center col-detail">
+                {% if estate.realtor.avatar %}
+                    <img class="mt-1" src="{{ estate.realtor.avatar.url }}" style="width: 100px; height: 100px">
+                {% endif %}
+                <p class="mt-2">{{ estate.realtor.name }}</p>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#realtor" class="btn btn-r">Подробнее
+                </button>
+                <div class="modal fade" id="realtor" tabindex="-1" aria-labelledby="realtorModal"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Детали риелтора</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p>Email: {{ estate.realtor.email }}</p>
+                                <p>Номер телефона: {{ estate.realtor.phone_number }}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container w-50 mt-5">
+        <p>{{ estate.city }}</p>
+        <p>{{ estate.description }}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Home {% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-4 text-center container-home1">
+        <img class="mainb" src="{% static 'main/img/mainb.png' %}">
+        <h2 class="maint">Найдите место, что сможете назвать домом</h2>
+        <button class="btn text-white btn1">Поиск</button>
+    </div>
+    <div class="lineg mt-5 ms-auto me-auto"></div>
+    <div class="container-fluid mt-5 text-center container-home2">
+        <div class="d-inline-flex justify-content-center">
+            <div class="col-abs">
+                <img class="img1" src="{% static 'main/img/laptop-2587224_1920 1.png' %}">
+                <h4 class="img-text1">ИСПОЛНЯЕМ МЕЧТЫ ВОТ УЖЕ<br> 16 ЛЕТ</h4>
+            </div>
+            <div class="col-abs">
+                <img class="img2" src="{% static 'main/img/business-962355_1920 2.png' %}">
+                <h4 class="img-text2">ВАША БЕЗОПАСНОСТЬ ПРЕВЫШЕ ВСЕГО</h4>
+            </div>
+        </div>
+    </div>
+    <div class="lineg mt-5 ms-auto me-auto"></div>
+    <h4 class="mt-4 text-center">Почему мы?</h4>
+    <div class="container-fluid mt-5 mb-5 text-center container-home3">
+        <div class="d-flex justify-content-center">
+            <div class="col-abs1">
+                <img class="img3" src="{% static 'main/img/mac 1.png' %}">
+            </div>
+            <div class="col-abs1">
+                <img class="img4 m-auto" src="{% static 'main/img/figure.svg' %}">
+                <div class="d-flex flex-column img-text4">
+                    <h3>БОЛЕЕ 200000 УСПЕШНЫХ СДЕЛОК</h3>
+                    <h3 class="mt-4">16 ЛЕТ НА РЫНКЕ НЕДВИЖИМОСТИ</h3>
+                    <h3 class="mt-4">ЛУЧШИЕ СПЕЦИАЛИСТЫ</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

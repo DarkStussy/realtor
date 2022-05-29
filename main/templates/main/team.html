@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Наша команда{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <h1 class="text-center mt-5 mb-2">Наша команда</h1>
+        <div class="line3 ms-auto me-auto"></div>
+        <a href="{% url 'main:add_realtor' %}" class="btn btn-primary mt-3">Добавить риелтора</a>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            {% for realtor in realtors %}
+                {% if realtor.avatar %}
+                    <div class="col-lg-3">
+                        <div class="card text-center border-0" style="width: 14rem;">
+                            <img src="{{ realtor.avatar.url }}" class="card-img-top">
+                            <div class="card-body">
+                                <h2 class="card-text">{{ realtor.name }}</h2>
+                                <small class="card-text text-muted">{{ realtor.speciality }}</small>
+                                <p class="card-text">{{ realtor.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

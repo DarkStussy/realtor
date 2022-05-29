@@ -1,0 +1,64 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Список недвижимости{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="line1"></div>
+        <form method="post">
+            {% csrf_token %}
+            <ul class="nav ms-5 mt-1">
+                <li class="nav-item me-1">
+                    {{ form.type_of_object|as_crispy_field }}
+                </li>
+                <li class="nav-item me-1">
+                    {{ form.type_of_deal|as_crispy_field }}
+                </li>
+                <li class="nav-item me-1">
+                    <button type="submit" class="btn btn-primary">Искать</button>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'main:add_object' %}" class="nav-link">Добавить недвижимость</a>
+                </li>
+            </ul>
+        </form>
+        <div class="line2 mt-1"></div>
+        <div class="row mt-5 text-center">
+            {% for estate in estates %}
+                {% if estate.main_image %}
+                    <div class="col-lg-4">
+                        <a style="text-decoration: none; color: black" href="{% url 'main:detail' estate.id %}">
+                            <div class="card m-auto mt-1 w-75" style="width: 18rem;">
+                                <img src="{{ estate.main_image.url }}" class="card-img-top">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{ estate.title }}
+                                    </p>
+                                    <div class="line3 ms-auto me-auto"></div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-4 text-start"><img class="me-1"
+                                                                              src="{% static 'main/img/Vector.png' %}">{{ estate.qty_rooms }}
+                                        </div>
+                                        <div class="col-sm-4"><img class="me-1"
+                                                                   src="{% static 'main/img/Vector (1).png' %}">{{ estate.bedroom_num }}
+                                        </div>
+                                        <div class="col-sm-4 text-end"><img class="me-1"
+                                                                            src="{% static 'main/img/Vector (2).png' %}">{{ estate.bathroom }}
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-6 text-start">Цена</div>
+                                        <div class="col-sm-6 text-end">123456</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
